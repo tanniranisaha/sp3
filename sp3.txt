@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <vector>
+using namespace std;
+
+int check(string data){
+    string key[32] = {"auto",	"break", "case", "char", "const",
+    	"continue", "default", "do", "double", "else", "enum", "extern",
+        "float", "for",	"goto",	"if", "int", "long", "register", "return", "short",
+        "signed", "sizeof",	"static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"};
+    char first_letter[53] = {'_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+    'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    char All_letter[63] = {'_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+    'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+    int passing_valu = 0;
+    int Data = 0;
+
+    if (data.length() > 32){
+        passing_valu = 0;
+    }
+    else{
+    for(int i=0;i<32;i++){
+        if (key[i] == data){
+            passing_valu = 0;
+            break;
+        }
+        else{
+            passing_valu = 1;
+        }
+    }
+
+    if (passing_valu == 1){
+        for(int i=0;i<data.length();i++){
+                if (i == 0){
+                    for (int j=0;j<53;j++)
+                    {
+                        if (first_letter[j] == data[i])
+                        {
+                            Data++;
+                        }
+                    }
+                    if (Data == 0)
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    int mount = Data;
+                    for (int k=0;k<63;k++)
+                    {
+                        if (All_letter[k] == data[i])
+                        {
+                            Data++;
+                        }
+                    }
+                    if (mount == Data)
+                    {
+                        break;
+                    }
+                }
+
+                }
+        }
+
+    }
+    if (Data == data.length()){
+        passing_valu = 1;
+        return passing_valu;
+    }
+    else{
+        passing_valu = 0;
+        return passing_valu;
+    }
+
+
+}
+
+int main(){
+    string data;
+    getline(cin, data, '`');
+    if (check(data) == 0){
+       cout << "Not identifier!";
+    }
+    else{
+        cout << "Identifier!!!";
+    }
+    return 0;
+}
